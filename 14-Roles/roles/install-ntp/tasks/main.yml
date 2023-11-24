@@ -1,0 +1,4 @@
+- name: install ntp
+  package:
+    name: ntp
+    state: present

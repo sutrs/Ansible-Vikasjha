@@ -1,0 +1,20 @@
+---
+- name: Example Playbook with Register
+  hosts: webserver
+  become: yes
+  tasks:
+    - name: install required softwares
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - httpd
+        - ntp
+        - wget
+        - telnet
+      register: softare_installation_output
+
+    - name: show softare_installation_output
+      debug:
+        msg: "{{ item.results }}"
+      loop: "{{ softare_installation_output.results }}"

@@ -1,0 +1,13 @@
+---
+- name: Gather Facts Example
+  hosts: webserver
+#  gather_facts: yes  # This is the default behavior, so you can omit it.
+
+  tasks:
+    - name: Display Hostname
+      debug:
+        msg: "Hostname is {{ ansible_hostname }}"
+
+    - name: Display OS Information
+      debug:
+        msg: "Operating System is {{ ansible_distribution }} {{ ansible_distribution_version }}"

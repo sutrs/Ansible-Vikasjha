@@ -1,0 +1,7 @@
+- name: Example Playbook with Environment Variables
+  hosts: webserver
+  tasks:
+    - name: Show the value of an environment variable using lookup
+      debug:
+        msg: "'The value of MY_ENV_VAR is {{ lookup('env', 'HTML_PATH') }}'"
+

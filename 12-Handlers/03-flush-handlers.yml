@@ -1,0 +1,27 @@
+---
+ - name: flush handlers example
+   hosts: webserver
+   gather_facts: yes
+   become: yes
+   tasks:
+     - name: update packages
+       become:  yes
+       package:
+         name: httpd
+         state: present
+       notify: send email
+
+     - name: running handlers which has been notified.
+       meta: flush_handlers
+
+     - name: perform patching
+       copy:
+         content: " {{ ansible_date_time }} "
+         dest: /tmp/test.txt
+         force: true
+       notify: send email
+       
+   handlers:
+     - name: send email
+       debug:
+         msg: "email sent"

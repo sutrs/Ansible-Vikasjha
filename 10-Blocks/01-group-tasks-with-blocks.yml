@@ -1,0 +1,21 @@
+---
+- name: block example
+  hosts: webserver
+  become: yes
+  tasks:
+     - name: Install, configure, and start Apache
+       block:
+         - name: Install httpd and memcached
+           package:
+             name: httpd
+             state: present
+
+         - name: Start service bar and enable it
+           ansible.builtin.service:
+             name: httpd
+             state: started
+             enabled: True
+       when: ansible_facts['distribution'] == 'Ubuntu'
+       become: true
+       become_user: root
+       ignore_errors: true

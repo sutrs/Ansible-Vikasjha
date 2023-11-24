@@ -1,0 +1,9 @@
+---
+- hosts: webserver
+  tasks:
+    - name: Show inventory variable values
+      debug:
+        msg: |
+          " inventory source: {{ ansible_inventory_sources }}"
+          "ansible user is: {{ ansible_user }}"
+          "ansible default HTML directory: {{ default_html_dir }}"

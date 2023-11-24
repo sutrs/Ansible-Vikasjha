@@ -1,0 +1,23 @@
+---
+- name: error handling with blocks example
+  hosts: localhost
+  gather_facts: no
+  tasks:
+   - name: Always do X
+     block:
+       - name: Print a message
+         ansible.builtin.debug:
+           msg: 'I execute normally'
+
+
+       - name: Never print this
+         ansible.builtin.debug:
+           msg: 'I never execute :-('
+     rescue:
+       - name: Rescue - Print when errors
+         ansible.builtin.debug:
+           msg: 'I caught an error, can do stuff here to fix it, :-)'
+     always:
+       - name: always - Always run
+         ansible.builtin.debug:
+           msg: "This always executes, :-)"

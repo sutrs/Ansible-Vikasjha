@@ -1,0 +1,9 @@
+---
+- name: install required softwares
+  hosts: webserver
+  become: yes
+  roles:
+    - install-git
+    - install-telnet
+    - install-ntp
+    - install-httpd

@@ -1,0 +1,35 @@
+---
+- name: Configure HTTPD on CentOS 7
+  hosts: webserver
+  become: yes  # This is to run tasks with elevated privileges
+
+  tasks:
+    - name: Install HTTPD (Apache)
+      yum:
+        name: httpd
+        state: present
+      notify: restart apache  # Notify the handler to restart Apache if it's installed or updated
+
+    - name: Open port 80 in CentOS Firewall
+      firewalld:
+        service: http
+        state: enabled
+        permanent: yes
+      notify: reload firewalld  # Notify the handler to reload firewalld after enabling the service
+
+    - name: Deploy html contents
+      copy:
+        content: "{{ ansible_date_time }}"
+        dest: /var/www/html/index.html
+      notify: restart apache  # Notify the handler to restart Apache when the configuration file changes
+
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
+
+    - name: reload firewalld
+      service:
+        name: firewalld
+        state: reloaded

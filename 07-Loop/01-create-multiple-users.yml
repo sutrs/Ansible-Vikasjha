@@ -1,0 +1,14 @@
+---
+- name: Create User Accounts
+  hosts: webserver
+  tasks:
+    - name: Create User Accounts
+      become: yes
+      user:
+        name: "{{ item }}"
+        state: absent # absent or present
+        groups: users
+      loop:
+        - user1
+        - user2
+        - user3

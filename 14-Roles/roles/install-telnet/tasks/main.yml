@@ -1,0 +1,4 @@
+- name: install telnet
+  package:
+    name: telnet
+    state: present

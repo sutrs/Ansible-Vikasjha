@@ -1,0 +1,9 @@
+- name: Create Directories for Each Date of the Month
+  hosts: webserver  # You can adjust the host or hosts as needed
+  gather_facts: false  # Disable gathering facts, as it's not needed for this task
+  tasks:
+    - name: Create Directories
+      ansible.builtin.file:
+        path: "/tmp/test_{{ item }}"
+        state:  touch # absent touch directory etc.
+      loop: "{{ range(1, 10 ) | list }}"

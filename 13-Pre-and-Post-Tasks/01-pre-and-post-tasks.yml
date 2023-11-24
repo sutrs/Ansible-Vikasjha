@@ -1,0 +1,23 @@
+---
+- hosts: webserver
+  gather_facts: no
+
+  pre_tasks:
+    - name: change ticket status to in_progress
+      debug:
+        msg: "Ticket Status Changed to In Progress"
+
+  tasks:
+    - name: performing patching
+      debug:
+        msg: "Patching done"
+  
+  post_tasks:
+
+    - name: change ticket status to resolved
+      debug:
+        msg: "ticket changed to resolved"
+
+    - name: notify all through email
+      debug:
+        msg: "email sent"

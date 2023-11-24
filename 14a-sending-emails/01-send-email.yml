@@ -1,0 +1,16 @@
+---
+- name: send email example
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Send an email
+      mail:
+        host: smtp.hostinger.com
+        port: 587
+        username: 
+        password: 
+        to: vijha1989@mailinator.com
+        subject: "new code deployed"
+        body: "new code deployed successfully"
+        from: email@itpanther.com
+        timeout: 20

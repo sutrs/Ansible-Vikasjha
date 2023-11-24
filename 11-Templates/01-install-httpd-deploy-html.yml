@@ -1,0 +1,22 @@
+---
+- name: install required software
+  hosts: webserver
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: install and start httpd services
+      ansible.builtin.package:
+        name: httpd
+        state: present
+      register: task_status
+
+    - name: start httpd services
+      ansible.builtin.service:
+        name: httpd
+        state: started
+
+    - name: use template to deploy a file
+      ansible.builtin.template:
+        src: html.j2
+        dest: /var/www/html/index.html

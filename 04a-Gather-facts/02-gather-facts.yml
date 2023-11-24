@@ -1,0 +1,8 @@
+---
+- name: Gather Facts Example
+  hosts: webserver
+  tasks:
+    - name: show mounts
+      debug:
+        msg: "{{ ansible_mounts }}"
+

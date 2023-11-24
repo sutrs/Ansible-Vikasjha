@@ -1,0 +1,17 @@
+---
+- name: install software
+  hosts: webserver
+  become: yes
+  vars:
+    software:
+      - git
+      - telnet
+      - wget
+  tasks:
+    - name: installing software
+      package:
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ software }}"
+      when: item == 'wget'
+    

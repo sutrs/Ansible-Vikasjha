@@ -1,0 +1,10 @@
+---
+- hosts: webserver
+  tasks:
+    - name: Show inventory variable values
+      debug:
+        msg: |
+          " inventory source: {{ ansible_inventory_sources }}"
+          "ansible playname is: {{ ansible_play_name }}"
+          "ansible play hosts are: {{ ansible_play_hosts }}"
+          "playbook directory is: {{ playbook_dir }}"

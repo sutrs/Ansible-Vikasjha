@@ -1,0 +1,22 @@
+---
+- name: send email example
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Send an email
+      mail:
+        host: smtp.hostinger.com
+        port: 587
+        username: email@itpanther.com
+        password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          37306135666638626563343764623066613139383564656461353634666531613762333739663536
+          3361323633363531303335386130373966363063353533630a643666356339316335636666346236
+          35633938613031383832323136343865613461303536383039396662616263663134393766616535
+          3864623634393765310a383034663535356261346464393337373936363964356336623461323433
+          62306437653832383965666333333964626231306439626663663335613938313031
+        to: vijha1989@mailinator.com
+        subject: "new code deployed"
+        body: "new code deployed successfully"
+        from: email@itpanther.com
+        timeout: 20

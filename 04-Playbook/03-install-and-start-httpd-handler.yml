@@ -1,0 +1,14 @@
+- hosts: webserver
+  become: yes
+  tasks:
+    - name: Ensure Apache is installed
+      package:
+        name: httpd
+        state: present #Change state to absent if you want uninstall 
+      notify: apache_started
+
+  handlers:
+    - name: apache_started
+      service:
+        name: httpd
+        state: started

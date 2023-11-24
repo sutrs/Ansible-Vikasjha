@@ -1,0 +1,15 @@
+---
+- name: Conditional Task
+  hosts: webserver
+  tasks:
+    - name: Install httpd
+      become: yes
+      package:
+        name: httpd
+        state: absent
+      register: httpd_install_result
+
+    - name: Execute task only if a condition is met
+      debug:
+        msg: "This task will execute"
+      when: httpd_install_result.changed

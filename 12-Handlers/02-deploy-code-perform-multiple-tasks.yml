@@ -1,0 +1,23 @@
+- name: install required software
+  hosts: webserver
+  gather_facts: yes
+  become: yes
+  
+  tasks:
+    - name: deploy latest html file
+      ansible.builtin.template:
+        src: html.j2
+        dest: /var/www/html/index.html
+      notify: latest_html_deployed
+
+  handlers:
+    - name: restart httpd services
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
+      listen: latest_html_deployed
+
+    - name: send email
+      debug: 
+        msg: "email sent."
+      listen: latest_html_deployed

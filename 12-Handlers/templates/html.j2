@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>Ansible Demo Website</title>
+  </head>
+  <body>
+    <h1>Ansible Date and Time Information</h1>
+    <h4> Hostname: {{ ansible_host }} </h4>
+    <ul>
+      {% for key, value in ansible_date_time.items() %}
+        <li>{{ key }}: {{ value }}</li>
+      {% endfor %}
+    </ul>
+    
+  </body>
+</html>
